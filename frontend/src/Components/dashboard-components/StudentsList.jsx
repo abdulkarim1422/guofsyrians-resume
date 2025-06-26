@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
 const studentsData = [
   {
@@ -84,6 +85,7 @@ const studentsData = [
 ];
 
 function StudentsList({ onSidebarHide }) {
+const navigate = useNavigate();
   return (
     <div className="flex w-full">
       <div className="w-full h-screen hidden sm:block sm:w-20 xl:w-60 flex-shrink-0">
@@ -209,6 +211,7 @@ function StudentsList({ onSidebarHide }) {
                   border: 'none',
                   cursor: 'pointer',
                 }}
+                onClick={() => navigate("/form")}
               >
                 <Icon path="res-react-dash-add-component" className="w-5 h-5" />
                 <div className="ml-2">Add Student</div>
