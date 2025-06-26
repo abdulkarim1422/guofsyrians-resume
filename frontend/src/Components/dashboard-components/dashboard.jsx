@@ -222,7 +222,7 @@ function NameCard({
           >
             <rect width="200" height="6" rx="3" fill="#2D2D2D" />
             <animated.rect
-              width={barPlayhead.interpolate(
+              width={barPlayhead.to(
                 (i) => i * (tasksCompleted / 5) * 200,
               )}
               height="6"
@@ -253,7 +253,7 @@ function NameCard({
               'text-lg',
             )}
           >
-            {transactions.interpolate((i) => `$${i.toFixed(2)}`)}
+            {transactions.to((i) => `$${i.toFixed(2)}`)}
           </animated.div>
           <div className="text-sm ">Last 6 month</div>
         </div>
@@ -456,10 +456,10 @@ function Satisfication() {
           />
 
           <animated.circle
-            cx={dashOffset.interpolate(
+            cx={dashOffset.to(
               (x) => 350 + 250 * Math.cos(map(x, 785.4, 0, pi, tau)),
             )}
-            cy={dashOffset.interpolate(
+            cy={dashOffset.to(
               (x) => 350 + 250 * Math.sin(map(x, 785.4, 0, pi, tau)),
             )}
             r="12"

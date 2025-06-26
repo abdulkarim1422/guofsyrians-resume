@@ -12,12 +12,21 @@ import "./App.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <HelmetProvider>
-            <BrowserRouter>
+            <BrowserRouter future={{ 
+                v7_startTransition: true,
+                v7_relativeSplatPath: true 
+            }}>
                 <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/cv" element={<Resume />} />
-                    <Route path="/form" element={<ContactForm />} />
+                    <Route path="/form" element={<Dashboard />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/students-list" element={<Dashboard />} />
+                    <Route path="/chat" element={<Dashboard />} />
+                    <Route path="/tasks" element={<Dashboard />} />
+                    <Route path="/reports" element={<Dashboard />} />
+                    <Route path="/settings" element={<Dashboard />} />
+                    <Route path="/contact-form" element={<ContactForm />} />
                 </Routes>
             </BrowserRouter>
         </HelmetProvider>

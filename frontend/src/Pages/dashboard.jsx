@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
+import { useNavigate, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { useSpring, animated, config } from '@react-spring/web';
 import './dashboard.css';
 import DashboardContent from '../Components/dashboard-components/dashboard.jsx';
 import StudentsList from '../Components/dashboard-components/StudentsList.jsx';
+import DashboardForm from '../Components/dashboard-components/DashboardForm.jsx';
 
 const sidebarItems = [
   [
     { id: '0', title: 'Dashboard', notifications: false },
-    { id: '1', title: 'Overview', notifications: false },
+    { id: '1', title: 'Form', notifications: false },
     { id: '2', title: 'Chat', notifications: 6 },
     { id: '3', title: 'Students list', notifications: false },
   ],
@@ -20,9 +21,10 @@ const sidebarItems = [
   ],
 ];
 
-export const App = () => {
+const DashboardApp = () => {
   const [showSidebar, onSetShowSidebar] = useState(false);
-  const [selectedPage, setSelectedPage] = useState('0'); // Track selected page
+  const navigate = useNavigate();
+  const location = useLocation();
   
   useEffect(() => {
     // Apply dashboard styles to body
@@ -34,24 +36,76 @@ export const App = () => {
     };
   }, []);
 
-  const renderContent = () => {
-    if (selectedPage === '3') {
-      return (
-        <StudentsList
-          onSidebarHide={() => {
-            onSetShowSidebar(true);
-          }}
-        />
-      );
+  // Get selected page from URL
+  const getSelectedPageFromPath = (pathname) => {
+    switch (pathname) {
+      case '/':
+      case '/dashboard':
+        return '0';
+      case '/form':
+        return '1';
+      case '/chat':
+        return '2';
+      case '/students-list':
+        return '3';
+      case '/tasks':
+        return '4';
+      case '/reports':
+        return '5';
+      case '/settings':
+        return '6';
+      default:
+        return '0';
     }
-    
-    return (
-      <DashboardContent
-        onSidebarHide={() => {
-          onSetShowSidebar(true);
-        }}
-      />
-    );
+  };
+
+  const selectedPage = getSelectedPageFromPath(location.pathname);
+
+  const handlePageSelect = (pageId) => {
+    switch (pageId) {
+      case '0':
+        navigate('/dashboard');
+        break;
+      case '1':
+        navigate('/form');
+        break;
+      case '2':
+        navigate('/chat');
+        break;
+      case '3':
+        navigate('/students-list');
+        break;
+      case '4':
+        navigate('/tasks');
+        break;
+      case '5':
+        navigate('/reports');
+        break;
+      case '6':
+        navigate('/settings');
+        break;
+      default:
+        navigate('/dashboard');
+    }
+  };
+
+  const renderCurrentPage = () => {
+    switch (location.pathname) {
+      case '/':
+      case '/dashboard':
+        return <DashboardContent onSidebarHide={() => onSetShowSidebar(true)} />;
+      case '/form':
+        return <DashboardForm onSidebarHide={() => onSetShowSidebar(true)} />;
+      case '/students-list':
+        return <StudentsList onSidebarHide={() => onSetShowSidebar(true)} />;
+      case '/chat':
+      case '/tasks':
+      case '/reports':
+      case '/settings':
+        return <DashboardContent onSidebarHide={() => onSetShowSidebar(true)} />;
+      default:
+        return <DashboardContent onSidebarHide={() => onSetShowSidebar(true)} />;
+    }
   };
 
   return (
@@ -62,9 +116,9 @@ export const App = () => {
         }}
         showSidebar={showSidebar}
         selectedPage={selectedPage}
-        onPageSelect={setSelectedPage}
+        onPageSelect={handlePageSelect}
       />
-      {renderContent()}
+      {renderCurrentPage()}
     </div>
   );
 }
@@ -146,7 +200,7 @@ function Sidebar({ onSidebarHide, showSidebar, selectedPage, onPageSelect }) {
                 Admin updated 09:12 am November 08,2020
               </div>
               <animated.div className="text-right text-gray-400 text-xs">
-                {precentage.interpolate((i) => `${Math.round(i)}%`)}
+                {precentage.to((i) => `${Math.round(i)}%`)}
               </animated.div>
               <div className="w-full text-gray-300">
                 <svg
@@ -340,7 +394,4 @@ function Image({ path = '1', className = 'w-4 h-4' }) {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
-
-export default App;
+export default DashboardApp;
