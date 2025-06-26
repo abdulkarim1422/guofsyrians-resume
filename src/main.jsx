@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <BrowserRouter>
                 <Routes>
                     <Route path="/cv" element={<Resume />} />
-                    <Route path="/" element={<ContactForm />} />
+                    <Route path="/form" element={<ContactForm />} />
                 </Routes>
             </BrowserRouter>
         </HelmetProvider>
