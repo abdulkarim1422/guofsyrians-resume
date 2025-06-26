@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import clsx from 'clsx';
 import { useSpring, animated, config } from '@react-spring/web';

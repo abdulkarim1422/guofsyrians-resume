@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, User, MessageSquare, Calendar, Briefcase, GraduationCap, Code, Award, Building, Globe } from 'lucide-react';
+import { Phone, MapPin, Send, User, MessageSquare, Calendar, Briefcase, GraduationCap, Code, Award, Globe } from 'lucide-react';
 import { SEO } from '../Components/SEO';
 import { MailInputComponent } from '../Components/form-components/MailInputComponent';
 
