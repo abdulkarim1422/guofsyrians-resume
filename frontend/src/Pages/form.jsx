@@ -193,14 +193,14 @@ export const ContactForm = () => {
         description="Edit and update resume information including profile, skills, experience, and projects."
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <>
         <div className="container mx-auto px-4 py-8">
           {/* Header Section */}
           <div className="text-center mb-12 flex flex-col items-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Resume Editor
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Update your professional information, skills, experience, and projects. 
               All changes will be saved to the database.
             </p>
@@ -209,15 +209,15 @@ export const ContactForm = () => {
           <form onSubmit={handleSubmit} className="max-w-6xl mx-auto space-y-8">
             
             {/* Profile Information */}
-                        <div className="bg-white rounded-2xl shadow-lg p-8">
-                          <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                            <User className="w-6 h-6 mr-2 text-blue-600" />
+                        <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+                          <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                            <User className="w-6 h-6 mr-2 text-blue-500" />
                             Profile Information
                           </h2>
                           
                           <div className="grid md:grid-cols-2 gap-6">
                             <div>
-                              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                                 Full Name *
                               </label>
                               <input
@@ -227,13 +227,13 @@ export const ContactForm = () => {
                                 value={formData.name}
                                 onChange={handleInputChange}
                                 required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                 placeholder="Your full name"
                               />
                             </div>
 
                             <div>
-                              <label htmlFor="occupation" className="block text-sm font-medium text-gray-700 mb-2">
+                              <label htmlFor="occupation" className="block text-sm font-medium text-gray-300 mb-2">
                                 Occupation *
                               </label>
                               <input
@@ -243,7 +243,7 @@ export const ContactForm = () => {
                                 value={formData.occupation}
                                 onChange={handleInputChange}
                                 required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                 placeholder="Your job title"
                               />
                             </div>
@@ -251,7 +251,7 @@ export const ContactForm = () => {
                             {MailInputComponent(formData, setFormData)}
 
                             <div>
-                              <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-2">
+                              <label htmlFor="telephone" className="block text-sm font-medium text-gray-300 mb-2">
                                 Phone Number *
                               </label>
                               <div className="relative">
@@ -263,14 +263,14 @@ export const ContactForm = () => {
                                   value={formData.telephone}
                                   onChange={handleInputChange}
                                   required
-                                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                  className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                   placeholder="+90 5xx xxx xx xx"
                                 />
                               </div>
                             </div>
 
                             <div>
-                              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                              <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2">
                                 Location *
                               </label>
                               <div className="relative">
@@ -282,14 +282,14 @@ export const ContactForm = () => {
                                   value={formData.location}
                                   onChange={handleInputChange}
                                   required
-                                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                  className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                   placeholder="City, Country"
                                 />
                               </div>
                             </div>
 
                             <div>
-                              <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
+                              <label htmlFor="image" className="block text-sm font-medium text-gray-300 mb-2">
                                 Profile Image Path
                               </label>
                               <input
@@ -298,7 +298,7 @@ export const ContactForm = () => {
                                 name="image"
                                 value={formData.image}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                 placeholder="images/profile.webp"
                               />
                             </div>
@@ -306,24 +306,24 @@ export const ContactForm = () => {
                         </div>
 
             {/* Academic Section */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                    <GraduationCap className="w-6 h-6 mr-2 text-red-600" />
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+                <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <GraduationCap className="w-6 h-6 mr-2 text-red-500" />
                     Academic Background
                 </h2>
                 
                 {formData.academic.map((edu, index) => (
-                    <div key={index} className="border border-gray-200 rounded-lg p-6 mb-6">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Education {index + 1}</h3>
+                    <div key={index} className="border border-gray-600 rounded-lg p-6 mb-6 bg-gray-750">
+                        <h3 className="text-lg font-semibold text-white mb-4">Education {index + 1}</h3>
                         <div className="grid md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-gray-300 mb-2">
                                     Career/Degree
                                 </label>
                                 <select
                                     value={edu.career}
                                     onChange={(e) => handleAcademicChange(index, 'career', e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                 >
                                     <option value="">Select a field</option>
                                     <option value="medicine">Medicine</option>
@@ -332,26 +332,26 @@ export const ContactForm = () => {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-gray-300 mb-2">
                                     Graduation Date
                                 </label>
                                 <input
                                     type="text"
                                     value={edu.date}
                                     onChange={(e) => handleAcademicChange(index, 'date', e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     placeholder="2019"
                                 />
                             </div>
                             <div className="md:col-span-2">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-gray-300 mb-2">
                                     Institution
                                 </label>
                                 <input
                                     type="text"
                                     value={edu.institution}
                                     onChange={(e) => handleAcademicChange(index, 'institution', e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     placeholder="University name"
                                 />
                             </div>
@@ -361,15 +361,15 @@ export const ContactForm = () => {
             </div>
 
             {/* About Me Section */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                <MessageSquare className="w-6 h-6 mr-2 text-green-600" />
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <MessageSquare className="w-6 h-6 mr-2 text-green-500" />
                 About Me
               </h2>
               
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="aboutLabel" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="aboutLabel" className="block text-sm font-medium text-gray-300 mb-2">
                     Section Label
                   </label>
                   <input
@@ -378,13 +378,13 @@ export const ContactForm = () => {
                     name="aboutLabel"
                     value={formData.aboutLabel}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="Profile / About"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="aboutDescription" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="aboutDescription" className="block text-sm font-medium text-gray-300 mb-2">
                     Description *
                   </label>
                   <textarea
@@ -394,7 +394,7 @@ export const ContactForm = () => {
                     onChange={handleInputChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                     placeholder="Brief description about yourself..."
                   />
                 </div>
@@ -402,15 +402,15 @@ export const ContactForm = () => {
             </div>
 
             {/* Skills Section */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                <Code className="w-6 h-6 mr-2 text-purple-600" />
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <Code className="w-6 h-6 mr-2 text-purple-500" />
                 Skills
               </h2>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="technicalLabel" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="technicalLabel" className="block text-sm font-medium text-gray-300 mb-2">
                     Technical Skills Label
                   </label>
                   <input
@@ -419,13 +419,13 @@ export const ContactForm = () => {
                     name="technicalLabel"
                     value={formData.technicalLabel}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="Technologies"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="softLabel" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="softLabel" className="block text-sm font-medium text-gray-300 mb-2">
                     Soft Skills Label
                   </label>
                   <input
@@ -434,13 +434,13 @@ export const ContactForm = () => {
                     name="softLabel"
                     value={formData.softLabel}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="Skills"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="technicalSkills" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="technicalSkills" className="block text-sm font-medium text-gray-300 mb-2">
                     Technical Skills (comma-separated)
                   </label>
                   <textarea
@@ -449,13 +449,13 @@ export const ContactForm = () => {
                     value={formData.technicalSkills}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                     placeholder="Angular, React, Java, Node.js..."
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="softSkills" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="softSkills" className="block text-sm font-medium text-gray-300 mb-2">
                     Soft Skills (comma-separated)
                   </label>
                   <textarea
@@ -464,7 +464,7 @@ export const ContactForm = () => {
                     value={formData.softSkills}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                     placeholder="Problem Solving, Communication, Leadership..."
                   />
                 </div>
@@ -472,15 +472,15 @@ export const ContactForm = () => {
             </div>
 
             {/* Social Media Section */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                <Globe className="w-6 h-6 mr-2 text-orange-600" />
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <Globe className="w-6 h-6 mr-2 text-orange-500" />
                 Social Media
               </h2>
               
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
-                  <label htmlFor="socialLabel" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="socialLabel" className="block text-sm font-medium text-gray-300 mb-2">
                     Section Label
                   </label>
                   <input
@@ -489,13 +489,13 @@ export const ContactForm = () => {
                     name="socialLabel"
                     value={formData.socialLabel}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="SOCIAL"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="linkedinUrl" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="linkedinUrl" className="block text-sm font-medium text-gray-300 mb-2">
                     LinkedIn URL
                   </label>
                   <input
@@ -504,13 +504,13 @@ export const ContactForm = () => {
                     name="linkedinUrl"
                     value={formData.linkedinUrl}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="https://linkedin.com/in/username"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="githubUrl" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="githubUrl" className="block text-sm font-medium text-gray-300 mb-2">
                     GitHub URL
                   </label>
                   <input
@@ -519,7 +519,7 @@ export const ContactForm = () => {
                     name="githubUrl"
                     value={formData.githubUrl}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="https://github.com/username"
                   />
                 </div>
@@ -527,55 +527,55 @@ export const ContactForm = () => {
             </div>
 
             {/* Work Experience Section */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                <Briefcase className="w-6 h-6 mr-2 text-indigo-600" />
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <Briefcase className="w-6 h-6 mr-2 text-indigo-500" />
                 Work Experience
               </h2>
               
               {formData.works.map((work, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-6 mb-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Position {index + 1}</h3>
+                <div key={index} className="border border-gray-600 rounded-lg p-6 mb-6 bg-gray-750">
+                  <h3 className="text-lg font-semibold text-white mb-4">Position {index + 1}</h3>
                   <div className="grid md:grid-cols-2 gap-4 mb-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         Job Title
                       </label>
                       <input
                         type="text"
                         value={work.title}
                         onChange={(e) => handleWorkChange(index, 'title', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         placeholder="FULL-STACK DEVELOPER"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         Period
                       </label>
                       <input
                         type="text"
                         value={work.period}
                         onChange={(e) => handleWorkChange(index, 'period', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         placeholder="Oct. 2021 - Present"
                       />
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         Company
                       </label>
                       <input
                         type="text"
                         value={work.company}
                         onChange={(e) => handleWorkChange(index, 'company', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         placeholder="Company Name"
                       />
                     </div>
                   </div>
                   
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Job Description
                   </label>
                   {work.description.map((desc, descIndex) => (
@@ -584,7 +584,7 @@ export const ContactForm = () => {
                         value={desc}
                         onChange={(e) => handleWorkDescriptionChange(index, descIndex, e.target.value)}
                         rows={2}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                         placeholder={`Description ${descIndex + 1}`}
                       />
                     </div>
@@ -596,55 +596,55 @@ export const ContactForm = () => {
 
 
             {/* Projects Section */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                <Award className="w-6 h-6 mr-2 text-yellow-600" />
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <Award className="w-6 h-6 mr-2 text-yellow-500" />
                 Projects
               </h2>
               
               {formData.projects.map((project, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-6 mb-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Project {index + 1}</h3>
+                <div key={index} className="border border-gray-600 rounded-lg p-6 mb-6 bg-gray-750">
+                  <h3 className="text-lg font-semibold text-white mb-4">Project {index + 1}</h3>
                   <div className="grid md:grid-cols-2 gap-4 mb-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         Project Name
                       </label>
                       <input
                         type="text"
                         value={project.name}
                         onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         placeholder="Project name"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         Company
                       </label>
                       <input
                         type="text"
                         value={project.company}
                         onChange={(e) => handleProjectChange(index, 'company', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         placeholder="Client/Company"
                       />
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         Period
                       </label>
                       <input
                         type="text"
                         value={project.period}
                         onChange={(e) => handleProjectChange(index, 'period', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         placeholder="Nov. 2019 - Jan. 2020"
                       />
                     </div>
                   </div>
                   
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Project Description
                   </label>
                   {project.description.map((desc, descIndex) => (
@@ -653,7 +653,7 @@ export const ContactForm = () => {
                         value={desc}
                         onChange={(e) => handleProjectDescriptionChange(index, descIndex, e.target.value)}
                         rows={2}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                         placeholder={`Description ${descIndex + 1}`}
                       />
                     </div>
@@ -663,7 +663,7 @@ export const ContactForm = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -684,13 +684,13 @@ export const ContactForm = () => {
 
               {/* Success/Error Messages */}
               {submitStatus === 'success' && (
-                <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg mt-4">
+                <div className="bg-green-800 border border-green-600 text-green-200 px-4 py-3 rounded-lg mt-4">
                   Resume data saved successfully! All changes have been updated.
                 </div>
               )}
 
               {submitStatus === 'error' && (
-                <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mt-4">
+                <div className="bg-red-800 border border-red-600 text-red-200 px-4 py-3 rounded-lg mt-4">
                   There was an error saving the data. Please try again.
                 </div>
               )}
@@ -698,7 +698,7 @@ export const ContactForm = () => {
 
           </form>
         </div>
-      </div>
+      </>
     </>
   );
 };
