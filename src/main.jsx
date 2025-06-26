@@ -5,6 +5,7 @@ import { Resume } from "./Pages/Resume";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async';
 import { ContactForm } from "./Pages/form";
+import Dashboard from "./Pages/dashboard";
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                     <Route path="/" element={<ContactForm />} />
                     <Route path="/cv" element={<Resume />} />
                     <Route path="/form" element={<ContactForm />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
             </BrowserRouter>
         </HelmetProvider>
