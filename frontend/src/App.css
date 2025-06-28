@@ -5,6 +5,7 @@
 @import "@fontsource/poppins/500.css";
 @import "@fontsource/poppins/600.css";
 @import "boxicons/css/boxicons.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap');
 
 /*===== VARIABLES CSS =====*/
 :root {
@@ -20,6 +21,7 @@
 
   /*========== Font and typography ==========*/
   --body-font: 'Poppins', sans-serif;
+  --arabic-font: 'Tajawal', sans-serif;
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;
   --h3-font-size: 1rem;
@@ -594,4 +596,24 @@ button.generate__btn {
     content: attr(data-print);
   }
 
+}
+
+/*========== ARABIC FONT ==========*/
+.arabic-text {
+  font-family: var(--arabic-font);
+  font-weight: 400;
+}
+
+.arabic-text-medium {
+  font-family: var(--arabic-font);
+  font-weight: 500;
+}
+
+.arabic-text-semibold {
+  font-family: var(--arabic-font);
+  font-weight: 600;
+}
+
+[dir="rtl"] {
+  font-family: var(--arabic-font);
 }

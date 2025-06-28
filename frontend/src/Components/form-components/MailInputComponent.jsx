@@ -2,7 +2,7 @@ import { Mail } from 'lucide-react';
 
 export function MailInputComponent(formData, setFormData) {
     return <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 arabic-text-medium" dir="rtl">
             البريد الإلكتروني (Gmail فقط) *
         </label>
         <div className="relative flex">
@@ -26,7 +26,7 @@ export function MailInputComponent(formData, setFormData) {
                     }
                 } }
                 required
-                className="w-full pl-10 pr-28 py-3 bg-gray-700 border border-gray-600 text-white rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-28 py-3 bg-gray-700 border border-gray-600 text-white rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all arabic-text"
                 placeholder="بريدك الإلكتروني"
                 autoComplete="off" 
                 dir="ltr" />
