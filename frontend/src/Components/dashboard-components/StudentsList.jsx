@@ -6,80 +6,88 @@ const studentsData = [
     id: 1,
     name: 'Alice Johnson',
     email: 'alice.johnson@example.com',
-    grade: 'A',
-    course: 'Computer Science',
-    status: 'Active',
-    enrollmentDate: '2023-09-01',
+    university: 'Harvard University',
+    major: 'Computer Science',
+    year: 'Doktora',
+    graduationDate: '2024-05-15',
+    cvLink: 'https://drive.google.com/file/d/alice-cv',
     avatar: 0
   },
   {
     id: 2,
     name: 'Bob Smith',
     email: 'bob.smith@example.com',
-    grade: 'B+',
-    course: 'Mathematics',
-    status: 'Active',
-    enrollmentDate: '2023-09-15',
+    university: 'MIT',
+    major: 'Mathematics',
+    year: 'Lisans',
+    graduationDate: '2025-06-10',
+    cvLink: 'https://drive.google.com/file/d/bob-cv',
     avatar: 1
   },
   {
     id: 3,
     name: 'Carol Williams',
     email: 'carol.williams@example.com',
-    grade: 'A-',
-    course: 'Physics',
-    status: 'Inactive',
-    enrollmentDate: '2023-08-20',
+    university: 'Stanford University',
+    major: 'Physics',
+    year: 'Graduate',
+    graduationDate: '2023-12-15',
+    cvLink: 'https://drive.google.com/file/d/carol-cv',
     avatar: 2
   },
   {
     id: 4,
     name: 'David Brown',
     email: 'david.brown@example.com',
-    grade: 'B',
-    course: 'Chemistry',
-    status: 'Active',
-    enrollmentDate: '2023-09-10',
+    university: 'UC Berkeley',
+    major: 'Chemistry',
+    year: 'Yüksek Lisans',
+    graduationDate: '2026-05-20',
+    cvLink: 'https://drive.google.com/file/d/david-cv',
     avatar: 3
   },
   {
     id: 5,
     name: 'Eva Davis',
     email: 'eva.davis@example.com',
-    grade: 'A+',
-    course: 'Biology',
-    status: 'Active',
-    enrollmentDate: '2023-08-25',
+    university: 'Caltech',
+    major: 'Biology',
+    year: 'Doktora',
+    graduationDate: '2024-06-05',
+    cvLink: 'https://drive.google.com/file/d/eva-cv',
     avatar: 4
   },
   {
     id: 6,
     name: 'Frank Miller',
     email: 'frank.miller@example.com',
-    grade: 'C+',
-    course: 'English Literature',
-    status: 'Active',
-    enrollmentDate: '2023-09-05',
+    university: 'Yale University',
+    major: 'English Literature',
+    year: 'Lisans',
+    graduationDate: '2025-05-25',
+    cvLink: 'https://drive.google.com/file/d/frank-cv',
     avatar: 5
   },
   {
     id: 7,
     name: 'Grace Wilson',
     email: 'grace.wilson@example.com',
-    grade: 'A',
-    course: 'History',
-    status: 'Inactive',
-    enrollmentDate: '2023-08-30',
+    university: 'Princeton University',
+    major: 'History',
+    year: 'Graduate',
+    graduationDate: '2023-05-30',
+    cvLink: 'https://drive.google.com/file/d/grace-cv',
     avatar: 6
   },
   {
     id: 8,
     name: 'Henry Moore',
     email: 'henry.moore@example.com',
-    grade: 'B-',
-    course: 'Art',
-    status: 'Active',
-    enrollmentDate: '2023-09-12',
+    university: 'Columbia University',
+    major: 'Art History',
+    year: 'Ön Lisans',
+    graduationDate: '2027-05-15',
+    cvLink: 'https://drive.google.com/file/d/henry-cv',
     avatar: 7
   }
 ];
@@ -135,44 +143,12 @@ const navigate = useNavigate();
           </div>
         </div>
 
-        {/* Students Table */}
+        {/* Students Cards Grid */}
         <div className="w-full p-2">
-          <div className="rounded-lg bg-card overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-700">
-              <h3 className="text-lg font-semibold text-white">All Students</h3>
-            </div>
-            
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-800">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Student
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Course
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Grade
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Enrollment Date
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-700">
-                  {studentsData.map((student) => (
-                    <StudentRow key={student.id} student={student} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {studentsData.map((student) => (
+              <StudentCard key={student.id} student={student} />
+            ))}
           </div>
         </div>
 
@@ -224,63 +200,91 @@ const navigate = useNavigate();
   );
 }
 
-function StudentRow({ student }) {
-  const getStatusColor = (status) => {
-    return status === 'Active' ? 'text-green-400' : 'text-red-400';
+function StudentCard({ student }) {
+  const getYearColor = (year) => {
+    switch (year) {
+      case 'Ön Lisans': return 'bg-blue-100 text-blue-700';
+      case 'yüksek Lisans': return 'bg-green-100 text-green-700';
+      case 'Lisans': return 'bg-yellow-100 text-yellow-700';
+      case 'Doktora': return 'bg-orange-100 text-orange-700';
+      case 'Graduate': return 'bg-purple-100 text-purple-700';
+      default: return 'bg-gray-100 text-gray-700';
+    }
   };
 
-  const getGradeColor = (grade) => {
-    if (grade.startsWith('A')) return 'text-green-400';
-    if (grade.startsWith('B')) return 'text-blue-400';
-    if (grade.startsWith('C')) return 'text-yellow-400';
-    return 'text-red-400';
+  const handleCVClick = (cvLink) => {
+    window.open(cvLink, '_blank');
+  };
+
+  const handleViewProfile = () => {
+    // You can navigate to a detailed student profile page here
+    console.log('View profile for:', student.name);
   };
 
   return (
-    <tr className="hover:bg-gray-800 transition-colors">
-      <td className="px-6 py-4 whitespace-nowrap">
-        <div className="flex items-center">
-          <Image 
-            path={`mock_faces_${student.avatar}`} 
-            className="w-10 h-10 mr-3" 
-          />
+    <div className="bg-gray-800 rounded-2xl shadow-lg p-6 space-y-4 border border-gray-700 hover:shadow-xl transition-shadow">
+      {/* Header Section */}
+      <div className="flex items-start justify-between">
+        <div className="flex items-center space-x-4">
+          <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center overflow-hidden">
+            <Image 
+              path={`mock_faces_${student.avatar}`} 
+              className="w-full h-full object-cover" 
+            />
+          </div>
           <div>
-            <div className="text-sm font-medium text-white">
-              {student.name}
-            </div>
-            <div className="text-sm text-gray-400">
-              {student.email}
-            </div>
+            <h2 className="text-lg font-semibold text-white">{student.name}</h2>
+            <p className="text-sm text-gray-400 mt-1">{student.major} • {student.university}</p>
           </div>
         </div>
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-white">{student.course}</div>
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <span className={clsx("text-sm font-medium", getGradeColor(student.grade))}>
-          {student.grade}
-        </span>
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <span className={clsx("text-sm font-medium", getStatusColor(student.status))}>
-          {student.status}
-        </span>
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-        {new Date(student.enrollmentDate).toLocaleDateString()}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-        <div className="flex space-x-2">
-          <button className="text-blue-400 hover:text-blue-300">
-            <Icon path="res-react-dash-options" className="w-4 h-4" />
-          </button>
-          <button className="text-green-400 hover:text-green-300">
-            <Icon path="res-react-dash-tick" className="w-4 h-4" />
-          </button>
+        <div className={clsx("px-3 py-1 rounded-full", getYearColor(student.year))}>
+          <span className="text-xs font-medium">{student.year}</span>
         </div>
-      </td>
-    </tr>
+      </div>
+
+      {/* Contact Info */}
+      <div className="text-sm text-gray-300">
+        <span className="font-medium">Email:</span> {student.email}
+      </div>
+
+      {/* Graduation Date */}
+      <div className="text-sm text-gray-300">
+        <span className="font-medium">Graduation:</span> {new Date(student.graduationDate).toLocaleDateString()}
+      </div>
+
+      {/* University and Major Tags */}
+      <div>
+        <div className="text-sm font-medium text-gray-300 mb-2">Academic Info:</div>
+        <div className="flex flex-wrap gap-2">
+          <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
+            {student.university}
+          </span>
+          <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
+            {student.major}
+          </span>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex items-center justify-between pt-4 border-t border-gray-700">
+        <button
+          onClick={() => handleCVClick(student.cvLink)}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2 transition-colors"
+        >
+          <Icon path="res-react-dash-options" className="w-4 h-4" />
+          <span>View CV</span>
+        </button>
+        <button 
+          onClick={handleViewProfile}
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2 transition-colors"
+        >
+          <span>View Profile</span>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
   );
 }
 
