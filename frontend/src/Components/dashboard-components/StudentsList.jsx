@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const studentsData = [
   {
@@ -89,11 +90,162 @@ const studentsData = [
     graduationDate: '2027-05-15',
     cvLink: 'https://drive.google.com/file/d/henry-cv',
     avatar: 7
+  },
+  {
+    id: 9,
+    name: 'Isabella Garcia',
+    email: 'isabella.garcia@example.com',
+    university: 'University of Chicago',
+    major: 'Economics',
+    year: 'Lisans',
+    graduationDate: '2024-12-15',
+    cvLink: 'https://drive.google.com/file/d/isabella-cv',
+    avatar: 0
+  },
+  {
+    id: 10,
+    name: 'Jack Thompson',
+    email: 'jack.thompson@example.com',
+    university: 'Northwestern University',
+    major: 'Journalism',
+    year: 'Yüksek Lisans',
+    graduationDate: '2025-08-20',
+    cvLink: 'https://drive.google.com/file/d/jack-cv',
+    avatar: 1
+  },
+  {
+    id: 11,
+    name: 'Katherine Lee',
+    email: 'katherine.lee@example.com',
+    university: 'University of Pennsylvania',
+    major: 'Business Administration',
+    year: 'Doktora',
+    graduationDate: '2026-03-10',
+    cvLink: 'https://drive.google.com/file/d/katherine-cv',
+    avatar: 2
+  },
+  {
+    id: 12,
+    name: 'Liam Rodriguez',
+    email: 'liam.rodriguez@example.com',
+    university: 'Duke University',
+    major: 'Engineering',
+    year: 'Lisans',
+    graduationDate: '2024-08-15',
+    cvLink: 'https://drive.google.com/file/d/liam-cv',
+    avatar: 3
+  },
+  {
+    id: 13,
+    name: 'Mia Anderson',
+    email: 'mia.anderson@example.com',
+    university: 'Georgetown University',
+    major: 'International Relations',
+    year: 'Graduate',
+    graduationDate: '2023-10-20',
+    cvLink: 'https://drive.google.com/file/d/mia-cv',
+    avatar: 4
+  },
+  {
+    id: 14,
+    name: 'Noah Martinez',
+    email: 'noah.martinez@example.com',
+    university: 'Vanderbilt University',
+    major: 'Medicine',
+    year: 'Doktora',
+    graduationDate: '2027-06-30',
+    cvLink: 'https://drive.google.com/file/d/noah-cv',
+    avatar: 5
+  },
+  {
+    id: 15,
+    name: 'Olivia Taylor',
+    email: 'olivia.taylor@example.com',
+    university: 'Brown University',
+    major: 'Psychology',
+    year: 'Yüksek Lisans',
+    graduationDate: '2025-12-15',
+    cvLink: 'https://drive.google.com/file/d/olivia-cv',
+    avatar: 6
+  },
+  {
+    id: 16,
+    name: 'Parker Wilson',
+    email: 'parker.wilson@example.com',
+    university: 'Cornell University',
+    major: 'Agriculture',
+    year: 'Lisans',
+    graduationDate: '2024-09-10',
+    cvLink: 'https://drive.google.com/file/d/parker-cv',
+    avatar: 7
+  },
+  {
+    id: 17,
+    name: 'Quinn Davis',
+    email: 'quinn.davis@example.com',
+    university: 'Rice University',
+    major: 'Architecture',
+    year: 'Ön Lisans',
+    graduationDate: '2026-07-25',
+    cvLink: 'https://drive.google.com/file/d/quinn-cv',
+    avatar: 0
+  },
+  {
+    id: 18,
+    name: 'Riley Johnson',
+    email: 'riley.johnson@example.com',
+    university: 'Emory University',
+    major: 'Environmental Science',
+    year: 'Graduate',
+    graduationDate: '2023-11-30',
+    cvLink: 'https://drive.google.com/file/d/riley-cv',
+    avatar: 1
+  },
+  {
+    id: 19,
+    name: 'Sophia Chen',
+    email: 'sophia.chen@example.com',
+    university: 'Carnegie Mellon University',
+    major: 'Computer Engineering',
+    year: 'Doktora',
+    graduationDate: '2026-04-15',
+    cvLink: 'https://drive.google.com/file/d/sophia-cv',
+    avatar: 2
+  },
+  {
+    id: 20,
+    name: 'Tyler White',
+    email: 'tyler.white@example.com',
+    university: 'Washington University',
+    major: 'Political Science',
+    year: 'Lisans',
+    graduationDate: '2025-01-20',
+    cvLink: 'https://drive.google.com/file/d/tyler-cv',
+    avatar: 3
   }
 ];
 
 function StudentsList({ onSidebarHide }) {
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [yearFilter, setYearFilter] = useState('');
+  const [showMore, setShowMore] = useState(false);
+
+  // Filter students based on search term and year filter
+  const filteredStudents = studentsData.filter(student => {
+    const matchesSearch = student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         student.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         student.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         student.major.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesYear = yearFilter === '' || student.year === yearFilter;
+    
+    return matchesSearch && matchesYear;
+  });
+
+  // Determine how many students to show
+  const studentsToShow = showMore ? filteredStudents : filteredStudents.slice(0, 9);
+  const hasMoreStudents = filteredStudents.length > 9;
   return (
     <div className="flex w-full">
       <div className="w-full h-screen hidden sm:block sm:w-20 xl:w-60 flex-shrink-0">
@@ -108,7 +260,7 @@ const navigate = useNavigate();
                 <div className="flex items-center p-2 bg-card ml-2 rounded-xl">
                   <Icon path="res-react-dash-premium-star" />
                   <div className="ml-2 font-bold text-premium-yellow">
-                    {studentsData.length} Students
+                    {filteredStudents.length} Students
                   </div>
                 </div>
               </div>
@@ -126,30 +278,76 @@ const navigate = useNavigate();
               onClick={onSidebarHide}
             />
           </div>
-          <div className="w-full sm:w-56 mt-4 sm:mt-0 relative">
-            <Icon
-              path="res-react-dash-search"
-              className="w-5 h-5 search-icon left-3 absolute"
-            />
-            <form action="#" method="POST">
+          <div className="w-full sm:w-auto mt-4 sm:mt-0 flex flex-col sm:flex-row gap-4">
+            {/* Year Filter */}
+            <div className="relative">
+              <select
+                value={yearFilter}
+                onChange={(e) => setYearFilter(e.target.value)}
+                className="px-4 py-2 pr-8 bg-card text-white rounded-lg border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">All Years</option>
+                <option value="Ön Lisans">Ön Lisans</option>
+                <option value="Lisans">Lisans</option>
+                <option value="Yüksek Lisans">Yüksek Lisans</option>
+                <option value="Doktora">Doktora</option>
+                <option value="Graduate">Graduate</option>
+              </select>
+            </div>
+            
+            {/* Search Input */}
+            <div className="relative">
+              <Icon
+                path="res-react-dash-search"
+                className="w-5 h-5 search-icon left-3 absolute"
+              />
               <input
                 type="text"
-                name="student_search"
-                id="student_search"
-                className="pl-12 py-2 pr-2 block w-full rounded-lg border-gray-300 bg-card"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-12 py-2 pr-2 w-full sm:w-56 rounded-lg border-gray-300 bg-card text-white"
                 placeholder="Search students..."
               />
-            </form>
+            </div>
           </div>
         </div>
 
         {/* Students Cards Grid */}
         <div className="w-full p-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {studentsData.map((student) => (
-              <StudentCard key={student.id} student={student} />
-            ))}
-          </div>
+          {filteredStudents.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-gray-400 text-lg mb-2">No students found</div>
+              <div className="text-gray-500 text-sm">Try adjusting your search criteria</div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {studentsToShow.map((student) => (
+                  <StudentCard key={student.id} student={student} />
+                ))}
+              </div>
+              
+              {/* View More Button */}
+              {hasMoreStudents && (
+                <div className="text-center mt-8">
+                  <button
+                    onClick={() => setShowMore(!showMore)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2 mx-auto"
+                  >
+                    <span>{showMore ? 'Show Less' : `View More (${filteredStudents.length - 9} remaining)`}</span>
+                    <svg 
+                      className={clsx("w-4 h-4 transition-transform", showMore ? "rotate-180" : "")} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
 
         {/* Add Student Button */}
