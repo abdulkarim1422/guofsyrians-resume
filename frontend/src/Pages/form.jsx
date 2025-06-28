@@ -12,6 +12,8 @@ export const ContactForm = () => {
     email: '',
     telephone: '',
     image: '',
+    imageFile: null,
+    relocateToSyria: '',
     
     // About Me
     aboutLabel: '',
@@ -65,6 +67,20 @@ export const ContactForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const turkishCities = [
+    'Adana', 'Adıyaman', 'Afyonkarahisar', 'Ağrı', 'Amasya', 'Ankara', 'Antalya', 'Artvin',
+    'Aydın', 'Balıkesir', 'Bilecik', 'Bingöl', 'Bitlis', 'Bolu', 'Burdur', 'Bursa',
+    'Çanakkale', 'Çankırı', 'Çorum', 'Denizli', 'Diyarbakır', 'Edirne', 'Elazığ', 'Erzincan',
+    'Erzurum', 'Eskişehir', 'Gaziantep', 'Giresun', 'Gümüşhane', 'Hakkâri', 'Hatay', 'Isparta',
+    'İçel (Mersin)', 'İstanbul', 'İzmir', 'Kars', 'Kastamonu', 'Kayseri', 'Kırklareli', 'Kırşehir',
+    'Kocaeli', 'Konya', 'Kütahya', 'Malatya', 'Manisa', 'Kahramanmaraş', 'Mardin', 'Muğla',
+    'Muş', 'Nevşehir', 'Niğde', 'Ordu', 'Rize', 'Sakarya', 'Samsun', 'Siirt',
+    'Sinop', 'Sivas', 'Tekirdağ', 'Tokat', 'Trabzon', 'Tunceli', 'Şanlıurfa', 'Uşak',
+    'Van', 'Yozgat', 'Zonguldak', 'Aksaray', 'Bayburt', 'Karaman', 'Kırıkkale', 'Batman',
+    'Şırnak', 'Bartın', 'Ardahan', 'Iğdır', 'Yalova', 'Karabük', 'Kilis', 'Osmaniye', 'Düzce'
+  ];
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -72,6 +88,36 @@ export const ContactForm = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData(prev => ({
+        ...prev,
+        imageFile: file,
+        image: file.name
+      }));
+      
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setFormData(prev => ({
+      ...prev,
+      imageFile: null,
+      image: ''
+    }));
+    setImagePreview(null);
+    // Reset the file input
+    const fileInput = document.getElementById('imageFile');
+    if (fileInput) fileInput.value = '';
   };
 
   const handleWorkChange = (index, field, value) => {
@@ -506,7 +552,9 @@ export const ContactForm = () => {
           location: formData.location,
           email: formData.email,
           telephone: formData.telephone,
-          image: formData.image
+          image: formData.image,
+          imageFile: formData.imageFile,
+          relocateToSyria: formData.relocateToSyria
         },
         aboutMe: {
           label: formData.aboutLabel,
@@ -581,15 +629,15 @@ export const ContactForm = () => {
             
             {/* Profile Information */}
                         <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-                          <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
-                            <User className="w-6 h-6 mr-2 text-blue-500" />
-                            Profile Information
+                          <h2 className="text-2xl font-semibold text-white mb-6 flex items-center" dir="rtl">
+                            <User className="w-6 h-6 ml-2 text-blue-500" />
+                            معلومات الملف الشخصي
                           </h2>
                           
                           <div className="grid md:grid-cols-2 gap-6">
                             <div>
-                              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                                Full Name *
+                              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                                الاسم الكامل *
                               </label>
                               <input
                                 type="text"
@@ -599,13 +647,14 @@ export const ContactForm = () => {
                                 onChange={handleInputChange}
                                 required
                                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                placeholder="Your full name"
+                                placeholder="اسمك الكامل"
+                                dir="rtl"
                               />
                             </div>
 
                             <div>
-                              <label htmlFor="occupation" className="block text-sm font-medium text-gray-300 mb-2">
-                                Occupation *
+                              <label htmlFor="occupation" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                                المسمى الوظيفي *
                               </label>
                               <input
                                 type="text"
@@ -615,15 +664,16 @@ export const ContactForm = () => {
                                 onChange={handleInputChange}
                                 required
                                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                placeholder="Your job title"
+                                placeholder="المسمى الوظيفي"
+                                dir="rtl"
                               />
                             </div>
 
                             {MailInputComponent(formData, setFormData)}
 
                             <div>
-                              <label htmlFor="telephone" className="block text-sm font-medium text-gray-300 mb-2">
-                                Phone Number *
+                              <label htmlFor="telephone" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                                رقم الهاتف *
                               </label>
                               <div className="relative">
                                 <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -636,42 +686,108 @@ export const ContactForm = () => {
                                   required
                                   className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                   placeholder="+90 5xx xxx xx xx"
+                                  dir="ltr"
                                 />
                               </div>
                             </div>
 
                             <div>
-                              <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2">
-                                Location *
+                              <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                                المدينة (داخل تركيا) *
                               </label>
                               <div className="relative">
                                 <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                                <input
-                                  type="text"
+                                <select
                                   id="location"
                                   name="location"
                                   value={formData.location}
                                   onChange={handleInputChange}
                                   required
                                   className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                  placeholder="City, Country"
-                                />
+                                  dir="rtl"
+                                >
+                                  <option value="">اختر مدينة تركية</option>
+                                  {turkishCities.map(city => (
+                                    <option key={city} value={city}>{city}</option>
+                                  ))}
+                                </select>
                               </div>
                             </div>
 
                             <div>
-                              <label htmlFor="image" className="block text-sm font-medium text-gray-300 mb-2">
-                                Profile Image Path
+                              <label htmlFor="relocateToSyria" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                                هل ستنتقل بشكل دائم إلى سوريا هذا الصيف؟ *
                               </label>
-                              <input
-                                type="text"
-                                id="image"
-                                name="image"
-                                value={formData.image}
+                              <select
+                                id="relocateToSyria"
+                                name="relocateToSyria"
+                                value={formData.relocateToSyria}
                                 onChange={handleInputChange}
+                                required
                                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                placeholder="images/profile.webp"
-                              />
+                                dir="rtl"
+                              >
+                                <option value="">اختر إجابتك</option>
+                                <option value="Yes">نعم</option>
+                                <option value="No">لا</option>
+                                <option value="Maybe">ربما</option>
+                              </select>
+                            </div>
+
+                            <div className="md:col-span-2">
+                              <label htmlFor="imageFile" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                                صورة الملف الشخصي
+                              </label>
+                              
+                              {/* Image Preview */}
+                              {imagePreview && (
+                                <div className="mb-4 relative inline-block">
+                                  <img 
+                                    src={imagePreview} 
+                                    alt="Profile preview" 
+                                    className="w-32 h-32 object-cover rounded-lg border-2 border-gray-600"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={removeImage}
+                                    className="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm transition-colors"
+                                    title="Remove image"
+                                  >
+                                    ×
+                                  </button>
+                                </div>
+                              )}
+                              
+                              {/* File Upload */}
+                              <div className="relative">
+                                <input
+                                  type="file"
+                                  id="imageFile"
+                                  accept="image/*"
+                                  onChange={handleImageUpload}
+                                  className="hidden"
+                                />
+                                <label
+                                  htmlFor="imageFile"
+                                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer hover:bg-gray-600 flex items-center justify-center space-x-2"
+                                  dir="rtl"
+                                >
+                                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                  </svg>
+                                  <span className="mr-2">{formData.imageFile ? 'تغيير الصورة' : '+ تحميل صورة الملف الشخصي'}</span>
+                                </label>
+                              </div>
+                              
+                              {formData.imageFile && (
+                                <p className="text-sm text-gray-400 mt-2" dir="rtl">
+                                  المحدد: {formData.imageFile.name}
+                                </p>
+                              )}
+                              
+                              <p className="text-xs text-gray-400 mt-1" dir="rtl">
+                                الصيغ المدعومة: JPG، PNG، GIF. الحجم الأقصى: 5MB
+                              </p>
                             </div>
                           </div>
                         </div>
