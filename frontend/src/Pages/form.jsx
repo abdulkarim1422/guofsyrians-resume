@@ -629,14 +629,14 @@ export const ContactForm = () => {
             
             {/* Profile Information */}
                         <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-                          <h2 className="text-2xl font-semibold text-white mb-6 flex items-center" dir="rtl">
+                          <h2 className="text-2xl font-semibold text-white mb-6 flex items-center arabic-text-semibold" dir="rtl">
                             <User className="w-6 h-6 ml-2 text-blue-500" />
                             معلومات الملف الشخصي
                           </h2>
                           
                           <div className="grid md:grid-cols-2 gap-6">
                             <div>
-                              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 arabic-text-medium" dir="rtl">
                                 الاسم الكامل *
                               </label>
                               <input
@@ -646,14 +646,14 @@ export const ContactForm = () => {
                                 value={formData.name}
                                 onChange={handleInputChange}
                                 required
-                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all arabic-text"
                                 placeholder="اسمك الكامل"
                                 dir="rtl"
                               />
                             </div>
 
                             <div>
-                              <label htmlFor="occupation" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                              <label htmlFor="occupation" className="block text-sm font-medium text-gray-300 mb-2 arabic-text-medium" dir="rtl">
                                 المسمى الوظيفي *
                               </label>
                               <input
@@ -663,7 +663,7 @@ export const ContactForm = () => {
                                 value={formData.occupation}
                                 onChange={handleInputChange}
                                 required
-                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all arabic-text"
                                 placeholder="المسمى الوظيفي"
                                 dir="rtl"
                               />
@@ -672,7 +672,7 @@ export const ContactForm = () => {
                             {MailInputComponent(formData, setFormData)}
 
                             <div>
-                              <label htmlFor="telephone" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                              <label htmlFor="telephone" className="block text-sm font-medium text-gray-300 mb-2 arabic-text-medium" dir="rtl">
                                 رقم الهاتف *
                               </label>
                               <div className="relative">
@@ -692,7 +692,7 @@ export const ContactForm = () => {
                             </div>
 
                             <div>
-                              <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                              <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2 arabic-text-medium" dir="rtl">
                                 المدينة (داخل تركيا) *
                               </label>
                               <div className="relative">
@@ -703,7 +703,7 @@ export const ContactForm = () => {
                                   value={formData.location}
                                   onChange={handleInputChange}
                                   required
-                                  className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                  className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all arabic-text"
                                   dir="rtl"
                                 >
                                   <option value="">اختر مدينة تركية</option>
@@ -715,7 +715,7 @@ export const ContactForm = () => {
                             </div>
 
                             <div>
-                              <label htmlFor="relocateToSyria" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                              <label htmlFor="relocateToSyria" className="block text-sm font-medium text-gray-300 mb-2 arabic-text-medium" dir="rtl">
                                 هل ستنتقل بشكل دائم إلى سوريا هذا الصيف؟ *
                               </label>
                               <select
@@ -724,7 +724,7 @@ export const ContactForm = () => {
                                 value={formData.relocateToSyria}
                                 onChange={handleInputChange}
                                 required
-                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all arabic-text"
                                 dir="rtl"
                               >
                                 <option value="">اختر إجابتك</option>
@@ -735,7 +735,7 @@ export const ContactForm = () => {
                             </div>
 
                             <div className="md:col-span-2">
-                              <label htmlFor="imageFile" className="block text-sm font-medium text-gray-300 mb-2" dir="rtl">
+                              <label htmlFor="imageFile" className="block text-sm font-medium text-gray-300 mb-2 arabic-text-medium" dir="rtl">
                                 صورة الملف الشخصي
                               </label>
                               
@@ -769,7 +769,7 @@ export const ContactForm = () => {
                                 />
                                 <label
                                   htmlFor="imageFile"
-                                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer hover:bg-gray-600 flex items-center justify-center space-x-2"
+                                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer hover:bg-gray-600 flex items-center justify-center space-x-2 arabic-text"
                                   dir="rtl"
                                 >
                                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -780,12 +780,12 @@ export const ContactForm = () => {
                               </div>
                               
                               {formData.imageFile && (
-                                <p className="text-sm text-gray-400 mt-2" dir="rtl">
+                                <p className="text-sm text-gray-400 mt-2 arabic-text" dir="rtl">
                                   المحدد: {formData.imageFile.name}
                                 </p>
                               )}
                               
-                              <p className="text-xs text-gray-400 mt-1" dir="rtl">
+                              <p className="text-xs text-gray-400 mt-1 arabic-text" dir="rtl">
                                 الصيغ المدعومة: JPG، PNG، GIF. الحجم الأقصى: 5MB
                               </p>
                             </div>
