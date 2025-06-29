@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource/poppins": "5.0.12",
+    "@fontsource/tajawal": "^5.2.6",
     "@react-spring/web": "^10.0.1",
     "@tailwindcss/vite": "^4.1.11",
     "@tsparticles/react": "^3.0.0",
