@@ -969,8 +969,8 @@ export const ContactForm = () => {
                 Skills
               </h2>
               
-              <div className="space-y-4">
-                {/* Add New Skill Input */}
+              <div className="space-y-6">
+                {/* Add New Skill Input Row */}
                 <div className="flex items-center space-x-3">
                   <div className="flex-1">
                     <input
@@ -978,16 +978,24 @@ export const ContactForm = () => {
                       value={currentSkill}
                       onChange={(e) => setCurrentSkill(e.target.value)}
                       onKeyPress={handleSkillKeyPress}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Enter a skill (e.g., JavaScript, Project Management, etc.)"
                     />
                   </div>
+                  <button
+                    type="button"
+                    onClick={addSkill}
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-lg flex items-center space-x-2 transition-colors whitespace-nowrap"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Add Skill</span>
+                  </button>
                 </div>
                 
                 {/* Skills List */}
                 {formData.skills.length > 0 && (
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-medium text-white mb-3">Your Skills:</h3>
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-medium text-white">Your Skills:</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                       {formData.skills.map((skill, index) => (
                         <div
@@ -1009,24 +1017,13 @@ export const ContactForm = () => {
                   </div>
                 )}
                 
+                {/* Empty State - Only show when no skills exist */}
                 {formData.skills.length === 0 && (
-                  <div className="text-center py-8 text-gray-400">
-                    <Code className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p>No skills added yet. Start by entering a skill above and clicking &quot;Add Skill&quot;.</p>
+                  <div className="text-center py-6 text-gray-400">
+                    <Code className="w-10 h-10 mx-auto mb-3 opacity-50" />
+                    <p className="text-sm">No skills added yet. Enter a skill above and click &quot;Add Skill&quot;.</p>
                   </div>
                 )}
-                
-                {/* Add Skill Button */}
-                <div className="flex justify-end mt-6">
-                  <button
-                    type="button"
-                    onClick={addSkill}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg flex items-center space-x-2 transition-colors"
-                  >
-                    <Plus className="w-4 h-4" />
-                    <span>Add Skill</span>
-                  </button>
-                </div>
               </div>
             </div>
 
