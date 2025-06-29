@@ -20,14 +20,7 @@ export const ContactForm = () => {
     aboutDescription: '',
     
     // Skills
-    skillGroups: [
-      {
-        technicalLabel: '',
-        softLabel: '',
-        technicalSkills: '',
-        softSkills: ''
-      }
-    ],
+    skills: [],
     
     // Social Media
     socialLabel: '',
@@ -417,60 +410,30 @@ export const ContactForm = () => {
     }));
   };
 
-  const handleSkillGroupChange = (index, field, value) => {
+  const [currentSkill, setCurrentSkill] = useState('');
+
+  const addSkill = () => {
+    if (currentSkill.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        skills: [...prev.skills, currentSkill.trim()]
+      }));
+      setCurrentSkill('');
+    }
+  };
+
+  const removeSkill = (index) => {
     setFormData(prev => ({
       ...prev,
-      skillGroups: prev.skillGroups.map((group, i) => 
-        i === index ? { ...group, [field]: value } : group
-      )
+      skills: prev.skills.filter((_, i) => i !== index)
     }));
   };
 
-  const addSkillGroup = () => {
-    setFormData(prev => ({
-      ...prev,
-      skillGroups: [...prev.skillGroups, {
-        technicalLabel: '',
-        softLabel: '',
-        technicalSkills: '',
-        softSkills: ''
-      }]
-    }));
-  };
-
-  const addPresetSkillGroup = (preset) => {
-    const presets = {
-      programming: {
-        technicalLabel: 'Programming Languages',
-        softLabel: 'Development Practices',
-        technicalSkills: 'JavaScript, TypeScript, Python, Java, C#, React, Node.js',
-        softSkills: 'Clean Code, Code Review, TDD, Agile Development'
-      },
-      tools: {
-        technicalLabel: 'Tools & Technologies',
-        softLabel: 'Methodologies',
-        technicalSkills: 'Git, Docker, AWS, MongoDB, PostgreSQL, Jenkins',
-        softSkills: 'CI/CD, DevOps, Scrum, Kanban'
-      },
-      design: {
-        technicalLabel: 'Design & Frontend',
-        softLabel: 'Design Skills',
-        technicalSkills: 'HTML, CSS, Sass, Tailwind, Figma, Adobe XD',
-        softSkills: 'UI/UX Design, Responsive Design, User Research'
-      }
-    };
-
-    setFormData(prev => ({
-      ...prev,
-      skillGroups: [...prev.skillGroups, presets[preset]]
-    }));
-  };
-
-  const removeSkillGroup = (index) => {
-    setFormData(prev => ({
-      ...prev,
-      skillGroups: prev.skillGroups.filter((_, i) => i !== index)
-    }));
+  const handleSkillKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addSkill();
+    }
   };
 
   const handleProjectChange = (index, field, value) => {
@@ -963,122 +926,66 @@ export const ContactForm = () => {
 
             {/* Skills Section */}
             <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold text-white flex items-center">
-                  <Code className="w-6 h-6 mr-2 text-purple-500" />
-                  Skills
-                </h2>
+              <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <Code className="w-6 h-6 mr-2 text-purple-500" />
+                Skills
+              </h2>
+              
+              <div className="space-y-4">
+                {/* Add New Skill Input */}
                 <div className="flex items-center space-x-3">
-                  <select
-                    onChange={(e) => {
-                      if (e.target.value) {
-                        addPresetSkillGroup(e.target.value);
-                        e.target.value = '';
-                      }
-                    }}
-                    className="bg-gray-700 border border-gray-600 text-white px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
-                    defaultValue=""
-                  >
-                    <option value="" disabled>Add Preset...</option>
-                    <option value="programming">Programming & Development</option>
-                    <option value="tools">Tools & Technologies</option>
-                    <option value="design">Design & Frontend</option>
-                  </select>
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      value={currentSkill}
+                      onChange={(e) => setCurrentSkill(e.target.value)}
+                      onKeyPress={handleSkillKeyPress}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      placeholder="Enter a skill (e.g., JavaScript, Project Management, etc.)"
+                    />
+                  </div>
                   <button
                     type="button"
-                    onClick={addSkillGroup}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                    onClick={addSkill}
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg flex items-center space-x-2 transition-colors"
                   >
                     <Plus className="w-4 h-4" />
-                    <span>Add Custom Group</span>
+                    <span>Add Skill</span>
                   </button>
                 </div>
+                
+                {/* Skills List */}
+                {formData.skills.length > 0 && (
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-medium text-white mb-3">Your Skills:</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {formData.skills.map((skill, index) => (
+                        <div
+                          key={index}
+                          className="bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 min-h-[3rem] flex items-center justify-center group hover:bg-gray-600 transition-colors relative"
+                        >
+                          <span className="text-white text-sm text-center flex-1 pr-6">{skill}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeSkill(index)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-400 hover:text-red-300 opacity-0 group-hover:opacity-100 transition-all"
+                            title="Remove skill"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {formData.skills.length === 0 && (
+                  <div className="text-center py-8 text-gray-400">
+                    <Code className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>No skills added yet. Start by entering a skill above and clicking &quot;Add Skill&quot;.</p>
+                  </div>
+                )}
               </div>
-              
-              {formData.skillGroups.map((group, index) => (
-                <div key={index} className="border border-gray-600 rounded-lg p-6 mb-6 bg-gray-750">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-white">Skill Group {index + 1}</h3>
-                    {formData.skillGroups.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeSkillGroup(index)}
-                        className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-colors"
-                        title="Remove this skill group"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                  
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Technical Skills Label
-                      </label>
-                      <input
-                        type="text"
-                        value={group.technicalLabel}
-                        onChange={(e) => handleSkillGroupChange(index, 'technicalLabel', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="Programming Languages, Frameworks, Tools, Databases..."
-                      />
-                      <p className="text-xs text-gray-400 mt-1">
-                        Examples: Programming Languages, Frontend Frameworks, Backend Technologies, Cloud Platforms
-                      </p>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Soft Skills Label
-                      </label>
-                      <input
-                        type="text"
-                        value={group.softLabel}
-                        onChange={(e) => handleSkillGroupChange(index, 'softLabel', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="Methodologies, Soft Skills, Certifications..."
-                      />
-                      <p className="text-xs text-gray-400 mt-1">
-                        Examples: Methodologies, Soft Skills, Certifications, Design Patterns
-                      </p>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Technical Skills (comma-separated)
-                      </label>
-                      <textarea
-                        value={group.technicalSkills}
-                        onChange={(e) => handleSkillGroupChange(index, 'technicalSkills', e.target.value)}
-                        rows={3}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                        placeholder="JavaScript, React, Node.js, Python, AWS, Docker..."
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Soft Skills (comma-separated)
-                      </label>
-                      <textarea
-                        value={group.softSkills}
-                        onChange={(e) => handleSkillGroupChange(index, 'softSkills', e.target.value)}
-                        rows={3}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                        placeholder="Agile, Scrum, Team Leadership, Communication, Problem Solving..."
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
-              
-              {formData.skillGroups.length === 0 && (
-                <div className="text-center py-8 text-gray-400">
-                  <Code className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <p>No skill groups yet. Add a preset template or create a custom group to get started.</p>
-                </div>
-              )}
             </div>
 
             {/* Social Media Section */}

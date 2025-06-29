@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 /*===== FONTS & ICONS =====*/
-@import "@fontsource/tajawal";
-@import "@fontsource/tajawal/400.css";
-@import "@fontsource/tajawal/500.css";
-@import "@fontsource/tajawal/700.css";
-@import "boxicons/css/boxicons.min.css";
+@import "@fontsource/poppins";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap');
+@import "boxicons/css/boxicons.min.css";
 
 /*===== VARIABLES CSS =====*/
 :root {
