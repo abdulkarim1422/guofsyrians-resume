@@ -24,8 +24,12 @@ export const ContactForm = () => {
     
     // Social Media
     socialLabel: '',
-    linkedinUrl: '',
-    githubUrl: '',
+    socialAccounts: [
+      {
+        platform: '',
+        url: ''
+      }
+    ],
     
     // Work Experience
     works: [
@@ -436,6 +440,51 @@ export const ContactForm = () => {
     }
   };
 
+  const handleSocialAccountChange = (index, field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      socialAccounts: prev.socialAccounts.map((account, i) => 
+        i === index ? { ...account, [field]: value } : account
+      )
+    }));
+  };
+
+  const addSocialAccount = () => {
+    setFormData(prev => ({
+      ...prev,
+      socialAccounts: [...prev.socialAccounts, { platform: '', url: '' }]
+    }));
+  };
+
+  const removeSocialAccount = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      socialAccounts: prev.socialAccounts.filter((_, i) => i !== index)
+    }));
+  };
+
+  const getPlatformIcon = (platform) => {
+    const iconMap = {
+      linkedin: 'bxl-linkedin-square',
+      github: 'bxl-github',
+      twitter: 'bxl-twitter',
+      instagram: 'bxl-instagram',
+      facebook: 'bxl-facebook',
+      youtube: 'bxl-youtube',
+      tiktok: 'bxl-tiktok',
+      discord: 'bxl-discord',
+      telegram: 'bxl-telegram',
+      whatsapp: 'bxl-whatsapp',
+      medium: 'bxl-medium',
+      behance: 'bxl-behance',
+      dribbble: 'bxl-dribbble',
+      portfolio: 'bx-globe',
+      website: 'bx-world',
+      other: 'bx-link'
+    };
+    return iconMap[platform] || 'bx-link';
+  };
+
   const handleProjectChange = (index, field, value) => {
     setFormData(prev => ({
       ...prev,
@@ -523,30 +572,15 @@ export const ContactForm = () => {
           label: formData.aboutLabel,
           description: formData.aboutDescription
         },
-        skills: {
-          groups: formData.skillGroups.map(group => ({
-            technicalLabel: group.technicalLabel,
-            softLabel: group.softLabel,
-            technicalSkills: group.technicalSkills.split(',').map(skill => skill.trim()).filter(skill => skill),
-            softSkills: group.softSkills.split(',').map(skill => skill.trim()).filter(skill => skill)
-          }))
-        },
+        skills: formData.skills,
         socialMedia: {
           label: formData.socialLabel,
-          social: [
-            {
-              label: "Visit Matias Lagos LinkedIn profile",
-              name: "linkedin",
-              url: formData.linkedinUrl,
-              className: "bxl-linkedin-square"
-            },
-            {
-              label: "Visit Matias Lagos GitHub profile", 
-              name: "github",
-              url: formData.githubUrl,
-              className: "bxl-github"
-            }
-          ]
+          social: formData.socialAccounts.filter(account => account.platform && account.url).map(account => ({
+            label: `Visit ${account.platform} profile`,
+            name: account.platform,
+            url: account.url,
+            className: getPlatformIcon(account.platform)
+          }))
         },
         experience: {
           works: formData.works,
@@ -757,19 +791,11 @@ export const ContactForm = () => {
 
             {/* Academic Section */}
             <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-                <div className="flex items-center justify-between mb-6">
+                <div className="mb-6">
                     <h2 className="text-2xl font-semibold text-white flex items-center">
                         <GraduationCap className="w-6 h-6 mr-2 text-red-500" />
                         Academic Background
                     </h2>
-                    <button
-                        type="button"
-                        onClick={addAcademicEntry}
-                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
-                    >
-                        <Plus className="w-4 h-4" />
-                        <span>Add Education</span>
-                    </button>
                 </div>
                 
                 {formData.academic.map((edu, index) => (
@@ -881,6 +907,18 @@ export const ContactForm = () => {
                         <p>No education entries yet. Click &quot;Add Education&quot; to get started.</p>
                     </div>
                 )}
+                
+                {/* Add Education Button */}
+                <div className="flex justify-end mt-6">
+                    <button
+                        type="button"
+                        onClick={addAcademicEntry}
+                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                    >
+                        <Plus className="w-4 h-4" />
+                        <span>Add Education</span>
+                    </button>
+                </div>
             </div>
 
             {/* About Me Section */}
@@ -944,14 +982,6 @@ export const ContactForm = () => {
                       placeholder="Enter a skill (e.g., JavaScript, Project Management, etc.)"
                     />
                   </div>
-                  <button
-                    type="button"
-                    onClick={addSkill}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg flex items-center space-x-2 transition-colors"
-                  >
-                    <Plus className="w-4 h-4" />
-                    <span>Add Skill</span>
-                  </button>
                 </div>
                 
                 {/* Skills List */}
@@ -985,79 +1015,124 @@ export const ContactForm = () => {
                     <p>No skills added yet. Start by entering a skill above and clicking &quot;Add Skill&quot;.</p>
                   </div>
                 )}
+                
+                {/* Add Skill Button */}
+                <div className="flex justify-end mt-6">
+                  <button
+                    type="button"
+                    onClick={addSkill}
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg flex items-center space-x-2 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Add Skill</span>
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Social Media Section */}
             <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-              <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
-                <Globe className="w-6 h-6 mr-2 text-orange-500" />
-                Social Media
-              </h2>
+              <div className="mb-6">
+                <h2 className="text-2xl font-semibold text-white flex items-center">
+                  <Globe className="w-6 h-6 mr-2 text-orange-500" />
+                  Social Media
+                </h2>
+              </div>
               
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <label htmlFor="socialLabel" className="block text-sm font-medium text-gray-300 mb-2">
-                    Section Label
-                  </label>
-                  <input
-                    type="text"
-                    id="socialLabel"
-                    name="socialLabel"
-                    value={formData.socialLabel}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="SOCIAL"
-                  />
-                </div>
+              <div className="space-y-4">
+                {/* Social Accounts List */}
+                {formData.socialAccounts.map((account, index) => (
+                  <div key={index} className="border border-gray-600 rounded-lg p-4 bg-gray-750">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-md font-medium text-white">Social Account {index + 1}</h4>
+                      {formData.socialAccounts.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeSocialAccount(index)}
+                          className="text-red-400 hover:text-red-300 transition-colors"
+                          title="Remove this social account"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Platform *
+                        </label>
+                        <select
+                          value={account.platform}
+                          onChange={(e) => handleSocialAccountChange(index, 'platform', e.target.value)}
+                          className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          required
+                        >
+                          <option value="">Select platform</option>
+                          <option value="linkedin">📈 LinkedIn</option>
+                          <option value="github">🐙 GitHub</option>
+                          <option value="twitter">🐦 Twitter</option>
+                          <option value="instagram">📷 Instagram</option>
+                          <option value="facebook">📘 Facebook</option>
+                          <option value="youtube">📺 YouTube</option>
+                          <option value="tiktok">🎵 TikTok</option>
+                          <option value="discord">💬 Discord</option>
+                          <option value="telegram">✈️ Telegram</option>
+                          <option value="whatsapp">📱 WhatsApp</option>
+                          <option value="medium">📝 Medium</option>
+                          <option value="behance">🎨 Behance</option>
+                          <option value="dribbble">🏀 Dribbble</option>
+                          <option value="portfolio">🌐 Portfolio</option>
+                          <option value="website">💻 Website</option>
+                          <option value="other">🔗 Other</option>
+                        </select>
+                      </div>
 
-                <div>
-                  <label htmlFor="linkedinUrl" className="block text-sm font-medium text-gray-300 mb-2">
-                    LinkedIn URL
-                  </label>
-                  <input
-                    type="url"
-                    id="linkedinUrl"
-                    name="linkedinUrl"
-                    value={formData.linkedinUrl}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="https://linkedin.com/in/username"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="githubUrl" className="block text-sm font-medium text-gray-300 mb-2">
-                    GitHub URL
-                  </label>
-                  <input
-                    type="url"
-                    id="githubUrl"
-                    name="githubUrl"
-                    value={formData.githubUrl}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="https://github.com/username"
-                  />
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Profile URL *
+                        </label>
+                        <input
+                          type="url"
+                          value={account.url}
+                          onChange={(e) => handleSocialAccountChange(index, 'url', e.target.value)}
+                          className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          placeholder="https://platform.com/username"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                
+                {formData.socialAccounts.length === 0 && (
+                  <div className="text-center py-8 text-gray-400">
+                    <Globe className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>No social accounts added yet. Click &quot;Add Account&quot; to get started.</p>
+                  </div>
+                )}
+                
+                {/* Add Account Button */}
+                <div className="flex justify-end mt-6">
+                  <button
+                    type="button"
+                    onClick={addSocialAccount}
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Add Account</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             {/* Work Experience Section */}
             <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-              <div className="flex items-center justify-between mb-6">
+              <div className="mb-6">
                 <h2 className="text-2xl font-semibold text-white flex items-center">
                   <Briefcase className="w-6 h-6 mr-2 text-indigo-500" />
                   Work Experience
                 </h2>
-                <button
-                  type="button"
-                  onClick={addWorkEntry}
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Add Position</span>
-                </button>
               </div>
               
               {formData.works.map((work, index) => (
@@ -1167,25 +1242,29 @@ export const ContactForm = () => {
                   <p>No work experience entries yet. Click &quot;Add Position&quot; to get started.</p>
                 </div>
               )}
+              
+              {/* Add Position Button */}
+              <div className="flex justify-end mt-6">
+                <button
+                  type="button"
+                  onClick={addWorkEntry}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add Position</span>
+                </button>
+              </div>
             </div>
 
 
 
             {/* Projects Section */}
             <div className="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-              <div className="flex items-center justify-between mb-6">
+              <div className="mb-6">
                 <h2 className="text-2xl font-semibold text-white flex items-center">
                   <Award className="w-6 h-6 mr-2 text-yellow-500" />
                   Projects
                 </h2>
-                <button
-                  type="button"
-                  onClick={addProjectEntry}
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Add Project</span>
-                </button>
               </div>
               
               {formData.projects.map((project, index) => (
@@ -1294,6 +1373,18 @@ export const ContactForm = () => {
                   <p>No project entries yet. Click &quot;Add Project&quot; to get started.</p>
                 </div>
               )}
+              
+              {/* Add Project Button */}
+              <div className="flex justify-end mt-6">
+                <button
+                  type="button"
+                  onClick={addProjectEntry}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add Project</span>
+                </button>
+              </div>
             </div>
 
             {/* Submit Button */}
